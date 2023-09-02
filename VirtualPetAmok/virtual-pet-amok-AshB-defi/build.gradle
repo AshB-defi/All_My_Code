@@ -1,0 +1,23 @@
+apply plugin: 'eclipse'
+apply plugin: 'java'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
+}
+
+test {
+	useJUnitPlatform()
+}
+task buildSrcFolders {
+
+	description 'Builds default source folders'
+
+	doLast {
+		mkdir("src/main/java")
+		mkdir("src/test/java")
+	}
+}
