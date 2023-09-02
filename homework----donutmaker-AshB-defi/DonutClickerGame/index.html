@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ashley's Donut's</title>
+
+</head>
+<body>
+    <div class="sectionLeft">
+        <center>
+        <div class="scoreContainer unselectable">
+        <span id="Score">0</span> Donuts <br>
+        <span id="ScorePerSecond">0</span> Donuts per second
+    </div>
+    <br>
+    <div class="clickerContainer unselectable">
+        <img src="donut-donut.png" height="280px" width="420px" onclick="addToScore(clickingPower)">
+    </div>
+    <button onclick="saveGame();">Save Game</button>
+    </center>
+    </div>
+
+    <style>
+        .sectionLeft {
+            float: left;
+            width: 80%;
+        }
+        .sectionRight {
+            float: right;
+            width: 20%;
+        } 
+        .scoreContainer {
+            background-color: rgb(187, 18, 230);
+            width: 50%;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .clickerContainer img {
+            position:relative;
+            transition: all .1s ease-in-out;
+        }
+        
+        .clickerContainer img:hover { transform: scale(1.10); }
+        .clickerContainer img:active {transform: scale(0.99);}
+        
+        .shopButton {
+            background-color: rgb(187, 18, 230);
+            transition: all .1s ease-in-out;
+            border-radius: 10px;
+            width: 100%;
+            margin: 10px 0px 10px 0px;
+        }
+        
+        .shopButton:hover {
+            background-color: #c7c7c7;
+            transition: all .1s ease-in-out;
+        }
+        
+        .shopButton #image {
+            width: 25%;
+        }
+        
+        .shopButton #nameAndCost p{
+            margin: 0px;
+            width: 60%;
+        }
+        
+        .shopButton #nameAndCost p:first-of-type {
+            font-size: 24px;
+        }
+        
+        .shopButton #amount {
+            font-size: 48px;
+            color: #595959;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            width: 15%;
+        }
+        
+        .sectionFooter {
+            margin-top: 20%;
+        }
+        
+        .unselectable {
+            user-select: none;
+        
+        }
+        
+        </style>
+
+    <div class="sectionRight">
+        <table class="shopButton unselectable" onclick="buyCursor()">
+            <tr>
+                <td id="imgae"><img src="mouse-cursor-gif.png" height="40px" width="40px"> </td>
+                <td id="nameAndCost">
+                    <p>Cursor</p>
+                    <p><span id="cursorCost">15</span> Donut</p>
+                </td>
+                <td id="amount"> <span id="cursors">0</span></td>
+            </tr>
+        </table>
+        <table class="shopButton unselectable" onclick="buyGrandma()">
+            <tr>
+                <td id="imgae"><img src="grandma.png" height="40px" width="40px"> </td>
+                <td id="nameAndCost">
+                    <p>Grandma</p>
+                    <p><span id="GrandmaCost">100</span> Donut</p>
+                </td>
+                <td id="amount"> <span id="Grandma">0</span></td>
+            </tr>
+        </table>
+        <table class="shopButton unselectable" onclick="buyOven()">
+            <tr>
+                <td id="imgae"><img src="oven.jpg" height="40px" width="40px"> </td>
+                <td id="nameAndCost">
+                    <p>Oven</p>
+                    <p><span id="ovenCost">1000</span> Donut</p>
+                </td>
+                <td id="amount"> <span id="ovens">0</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var Score= 1;
+        var clickingPower = 1;
+
+        var cursorCost = 15;
+        var cursors = 0;
+        var GrandmaCost = 100;
+        var Grandma = 0;
+        var ovenCost = 1000;
+        var ovens = 0;
+
+        function buyCursor() {
+            if (Score >= cursorCost) {
+                Score + Score - cursorCost;
+                cursors = cursors + 1;
+                cursorCost = Math.round(cursorCost * 1.15);
+
+                document.getElementById("Score").innerHTML = Score;
+                document.getElementById("cursorCost").innerHTML = cursorCost;
+                document.getElementById("cursors").innerHTML = cursors;
+                updateScorePerSecond();
+
+            }
+        }
+
+        function buyGrandma() {
+            if (Score >= GrandmaCost) {
+                Score + Score - GrandmaCost;
+                Grandma = Grandma + 1;
+                GrandmaCost = Math.round(GrandmaCost * 1.10);
+
+                document.getElementById("Score").innerHTML = Score;
+                document.getElementById("GrandmaCost").innerHTML = GrandmaCost;
+                document.getElementById("Grandma").innerHTML = Grandma;
+                updateScorePerSecond();
+            }
+        }
+
+        function buyOven() {
+            if (Score >= ovenCost) {
+                Score + Score - ovenCost;
+                ovens = ovens + 1;
+                ovenCost = Math.round(ovenCost * 1.15);
+
+                document.getElementById("Score").innerHTML = Score;
+                document.getElementById("ovenCost").innerHTML = ovenCost;
+                document.getElementById("ovens").innerHTML = ovens;
+                updateScorePerSecond();
+            }
+        }
+        function addToScore(amount) {
+            Score = Score + amount;
+            document.getElementById("Score").innerHTML = Score;
+        }
+
+        function updateScorePerSecond() {
+            ScorePerSecond = cursors + Grandma * 5;
+            document.getElementById("ScorePerSecond").innerHTML = ScorePerSecond;
+        }
+
+        function loadGame() {
+            var gameSave = JSON.parse(localStorage.getItem("gameSave"));
+            if (typeof savedGame.score !== "undefined") Score = savedGame.Score;
+            if (typeof savedGame.clickingPower !== "undefined") clickingPower = savedGame.clickingPower;
+            if (typeof savedGame.cursorCost !== "undefined") cursorCost = savedGame.cursorCost;
+            if (typeof savedGame.cursors !== "undefined") cursors = savedGame.cursors;
+            if (typeof savedGame.GrandmaCost !== "undefined") GrandmaCost = savedGame.GrandmaCost;
+            if (typeof savedGame.Grandma !== "undefined") Grandma = savedGame.Grandma;
+            if (typeof savedGame.ovenCost !== "undefined") ovenCost = savedGame.ovenCost;
+            if (typeof savedGame.ovens !== "undefined") ovens = savedGame.ovens;
+        }
+
+        function updateScorePerSecond() {
+            ScorePerSecond = cursors + Grandma * 5 + ovens * 60;
+            document.getElementById("ScorePerSecond").innerHTML = ScorePerSecond;
+        }
+
+        function saveGame() {
+            var gameSave = {
+                Score: Score,
+                clickingPower: clickingPower,
+                cursorCost: cursorCost,
+                cursors: cursors,
+                GrandmaCost: GrandmaCost,
+                Grandma: Grandma,
+                ovenCost: ovenCost,
+                ovens: ovens
+            };
+            localStorage.setItem("gameSave", JSON.stringify(gameSave));
+        }
+
+        window.onload = function() {
+            loadGame();
+        };
+
+        setInterval(function() {
+            Score = Score + cursors;
+            Score = Score + Grandma * 5;
+            Score = Score + ovens * 60;
+            document.getElementById("Score").innerHTML = Score;
+
+            document.title = Score + "Donut - Ashley's Donut's";
+        }, 1000); // 1000ms = 1 second
+
+        setInterval (function() {
+            saveGame();
+        }, 30000) ; // 3000ms = 30 seconds
+    </script>
+
+    
+  
+    <div id=""></div>
+    <script src="app.js"></script>
+</body>
+</html>

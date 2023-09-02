@@ -1,0 +1,112 @@
+*
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn {
+  background-color: rgb(187, 18, 230);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.sectionLeft {
+    float: left;
+    width: 80%;
+}
+
+.sectionRight {
+    float: right;
+    width: 20%;
+} 
+
+.scoreContainer {
+    background-color: rgb(187, 18, 230);
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.clickerContainer img {
+    position:relative;
+    transition: all .1s ease-in-out;
+}
+
+.clickerContainer img:hover { 
+    transform: scale(1.10); 
+}
+.clickerContainer img:active {
+    transform: scale(0.99);
+}
+
+.shopButton {
+    background-color: rgb(187, 18, 230);
+    transition: all .1s ease-in-out;
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px 0px 
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(187, 18, 230);
+  padding: 1rem 1.5rem;
+  width: 24rem;
+  border-radius: 0.5rem;
+}
+.close-button {
+  float: right;
+  width: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: lightgray;
+}
+.close-button:hover {
+  background-color: darkgray;
+}
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
