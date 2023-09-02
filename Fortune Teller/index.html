@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<script>
+  function getRoygbivColor() {
+    let color = prompt("Enter your favorite ROYGBIV color. If you do not know what ROYGBIV is, enter 'Help'");
+    if (color.toLowerCase() == 'help') {
+        alert("ROYGBIV is an acronym for the sequence of hues in a rainbow: Red, Orange, Yellow, Green, Blue, Indigo, Violet.");
+        return getRoygbivColor();
+    } else {
+        return color;
+    }
+}
+
+
+function tellFortune(firstName, lastName, age, birthMonth, color, siblings) {
+    return `${firstName} ${lastName}, at ${age}, you chose the color ${color}, born in ${birthMonth} and have ${siblings} siblings.`;
+}
+
+function main() {
+    alert("Welcome to the Fortune Teller!");
+
+    let firstName = prompt('Enter your first name: ');
+    let lastName = prompt('Enter your last name: ');
+    let age = prompt('Enter your age: ');
+    let birthMonth = prompt('Enter your birth month (as an integer, 1 for January, 12 for December): ');
+    let color = getRoygbivColor();
+    let siblings = prompt('Enter the number of your siblings: ');
+
+    let fortune = tellFortune(firstName, lastName, age, birthMonth, color, siblings);
+    alert('Your fortune is:\n' + fortune);
+}
+
+main();
+
+</script>
+</html>
